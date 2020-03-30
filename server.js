@@ -29,6 +29,9 @@ router.post('/message', function (req, res) { // Solo atiendo a las peticiones p
     }
 });
 
+// Servidor estático de archivos
+app.use('/app', express.static('public')); // Desde app, me servira los archivos de public, acá podríamos colocar nuestro frontend y ya generar nuestra comunicación con el API
+
 //app.use('/', function (req, res) { // req de peticion y res de respuesta
 //    res.send('Hola');
 //});
