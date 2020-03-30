@@ -1,0 +1,27 @@
+{
+  "name": "nodejs",
+  "version": "0.1.0",
+  "description": "Un chat como telegram, pero mucho mejor",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodcko2417/nodejs.git"
+  },
+  "keywords": [
+    "chat",
+    "telgram",
+    "server"
+  ],
+  "author": "Rodcko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rodcko2417/nodejs/issues"
+  },
+  "homepage": "https://github.com/rodcko2417/nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
