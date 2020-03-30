@@ -2,6 +2,7 @@
 const express = require('express'); // Otra manera de escribirlo: import express from 'express'
 const bodyParser = require('body-parser'); // Body Parser es una extension/modulo de Express, que nos permite trabajar con el body de la peticion de forma sencilla
 // Instalar body parser: npm i body parser
+const response = require('./network/response'); // Como traer un archivo local, es decir un modulo
 const router = express.Router(); // Router de Express: nos permite separar cabeceras, por metodo, url, etc
 
 var app = express(); // Con esto ya inicializamos express
@@ -11,27 +12,21 @@ app.use(router); // Agregamos el router
 
 // Con el router ya podemos separar por rutas y los diferentes metodos HTTP
 router.get('/message', function (req, res) { // Solo atiendo a las peticiones get
-    // Cabeceras, las mas utilizadas: cache-control, user-agent (si vienen desde un movil, pc, os, etc), accept/accept-encoding
-    console.log(req.headers); // Pedir headers
-    res.header({ // Enviar headers personalizados
-        "custom-header": "Nuestro valor personalizado"
-    })
-    // Aca va el body, en la request
-    console.log(req.body);
-    // O bien, podemos acceder a un query así 
-    console.log(req.query);
-    res.send('Mensaje ' + req.body.text  + ' añadido correctamente'); // Aca mandamos el body al cliente
-    
+    response.success(req, res, 'Lista de mensajes'); // Va a llamar nuestro modulo response y vaya a ejectura la respuesta de tipo success 
     
 });
 
 router.post('/message', function (req, res) { // Solo atiendo a las peticiones post
     //res.send('Mensaje añadido correctamente xd');
     // Formas de responder una petición
-    res.send(); // Enviar una respuesta vacia
-    res.status(201).send(); // Podemos enviar un status
-    res.status(201).send([{error: '', body: 'Creado correctamente'}]); // Devolver un error vacio pero si un contenidoo bien un array como este ejemplo
-
+    //res.send(); // Enviar una respuesta vacia
+    //res.status(201).send(); // Podemos enviar un status
+    //res.status(201).send([{error: '', body: 'Creado correctamente'}]); // Devolver un error vacio pero si un contenidoo bien un array como este ejemplo
+    if (req.query.error == "ok") {
+        response.error(req, res, 'Error simulado', 401);
+    } else {
+        response.success(req, res, 'Creado correctamente', 201);
+    }
 });
 
 //app.use('/', function (req, res) { // req de peticion y res de respuesta
