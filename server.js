@@ -21,10 +21,17 @@ router.get('/message', function (req, res) { // Solo atiendo a las peticiones ge
     // O bien, podemos acceder a un query así 
     console.log(req.query);
     res.send('Mensaje ' + req.body.text  + ' añadido correctamente'); // Aca mandamos el body al cliente
+    
+    
 });
 
 router.post('/message', function (req, res) { // Solo atiendo a las peticiones post
-    res.send('Mensaje añadido correctamente xd');
+    //res.send('Mensaje añadido correctamente xd');
+    // Formas de responder una petición
+    res.send(); // Enviar una respuesta vacia
+    res.status(201).send(); // Podemos enviar un status
+    res.status(201).send([{error: '', body: 'Creado correctamente'}]); // Devolver un error vacio pero si un contenidoo bien un array como este ejemplo
+
 });
 
 //app.use('/', function (req, res) { // req de peticion y res de respuesta
