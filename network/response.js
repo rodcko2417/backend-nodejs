@@ -7,7 +7,8 @@ exports.success = function (req, res, message, status) { // Podemos configurar a
     });
 }
 
-exports.error = function (req, res, message, status) {
+exports.error = function (req, res, message, status, details) {
+    console.error('[response error] ' + details); // Tener un log de lo que ha sucedido, pero no enviar info confidencial al cliente
     res.status(status || 500).send({ // Si no hay status, por defecto mandame el 200
         error: message,
         body: '',

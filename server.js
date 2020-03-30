@@ -23,7 +23,7 @@ router.post('/message', function (req, res) { // Solo atiendo a las peticiones p
     //res.status(201).send(); // Podemos enviar un status
     //res.status(201).send([{error: '', body: 'Creado correctamente'}]); // Devolver un error vacio pero si un contenidoo bien un array como este ejemplo
     if (req.query.error == "ok") {
-        response.error(req, res, 'Error simulado', 401);
+        response.error(req, res, 'Error insperado', 500, 'Es solo una simulación de los errores');
     } else {
         response.success(req, res, 'Creado correctamente', 201);
     }
