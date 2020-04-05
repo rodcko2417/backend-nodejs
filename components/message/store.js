@@ -16,9 +16,12 @@ function addMessage(message) {
     myMessage.save();
 }
 
-async function getMessages(message) {
-    //return list;
-    const messages = await Model.find(); // Pedir todos los documentos
+async function getMessages(filterUser) {
+    let filter = {};
+    if (filterUser !== null) {
+        filter = { user: filterUser }; // Solo me traiga los usuarios que coincidan con filterUser
+    }
+    const messages = await Model.find(filter); // Pedir todos los documentos
     return messages; 
 }
 
@@ -29,7 +32,7 @@ async function updateText(id, message) {
     });
 
     foundMessage.message = message;
-    
+
     const newMessage = await foundMessage.save();
     return newMessage; 
 }
