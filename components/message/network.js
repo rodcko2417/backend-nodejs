@@ -23,5 +23,16 @@ router.post('/', function (req, res) {
             response.error(req, res, 'Informacion invalida', 400, 'Error en el controlador');
         });
 });
+// 1. Creamos una ruta para modificar un mensaje, con el metodo PATCH (actualizar)
+router.patch('/:id', function (req, res) {  
+    // Mando a llamar el controlador
+    controller.updateMessage(req.params.id, req.body.message)
+        .then((data) => {
+            response.success(req, res, data, 200);
+        })
+        .catch(e => {
+            response.error(req, res, 'Error interno', 500, e);
+        });
+})
 
 module.exports = router;

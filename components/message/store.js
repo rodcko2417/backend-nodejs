@@ -22,9 +22,23 @@ async function getMessages(message) {
     return messages; 
 }
 
+// 3. Creamos una funcion para actualizar el mensaje
+async function updateText(id, message) {
+    const foundMessage = await Model.findOne({
+        _id: id // Va a nuestra bd en mongodb va a ver el modelo y escogera el que tenga el id que viene desde la url
+    });
+
+    foundMessage.message = message;
+    
+    const newMessage = await foundMessage.save();
+    return newMessage; 
+}
+
+
 module.exports = {
     add: addMessage,
     list: getMessages,
+    updateText: updateText,
     // get
     // update
     // delete
