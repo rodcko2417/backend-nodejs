@@ -15,14 +15,12 @@ function addUser(name) {
 }
 
 
-function getUsers(filterUser) {
-    return new Promise((resolve, reject) => {
-        resolve(store.list(filterUser));
-    })
+function listUsers() {
+    return store.list();
 }
 
 
 module.exports = {
     addUser,
-    getUsers
+    listUsers
 }

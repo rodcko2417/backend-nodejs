@@ -8,17 +8,12 @@ function addUser(user) {
 }
 
 // Obtener una lista de usuario
-async function getUsers(filterUser) {
-    let filter = {};
-    if (filterUser !== null) {
-        filter = { name: filterUser }; // Solo me traiga los usuarios que coincidan con filterUser
-    }
-    const users = await Model.find(filter); // Pedir todos los documentos
-    return users; 
+function listUsers() {
+    return Model.find();
 }
 
 
 module.exports = {
     add: addUser,
-    list: getUsers, 
+    list: listUsers, 
 }
