@@ -6,12 +6,21 @@ function addMessage(message) {
 }
 
 async function getMessages(filterUser) {
-    let filter = {};
-    if (filterUser !== null) {
-        filter = { user: filterUser }; // Solo me traiga los usuarios que coincidan con filterUser
-    }
-    const messages = await Model.find(filter); // Pedir todos los documentos
-    return messages; 
+    return new Promise((resolve, reject) => {
+        let filter = {};
+        if (filterUser !== null) {
+            filter = { user: filterUser }; // Solo me traiga los usuarios que coincidan con filterUser
+        }
+        Model.find(filter) // Pedir todos los documentos
+            .populate('user')
+            .exec((error, populated) => { // Hace el cruce y ya nos devuelve toda la data del usuario
+                if(error) {
+                    reject(error);
+                    return false;
+                }
+                resolve(populated);
+            });
+    })
 }
 
 // 3. Creamos una funcion para actualizar el mensaje

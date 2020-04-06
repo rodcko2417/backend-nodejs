@@ -6,7 +6,10 @@ const Schema = mongoose.Schema;
 
 // Empezamos a constuir nuestro esquema, y a traves de este objeto podemos colocar todas las propiedades que querramos
 const mySchema = new Schema({
-    user: String,
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User',
+    },
     message: {
         type: String,
         required: true, // validamos que si se almacene algo
