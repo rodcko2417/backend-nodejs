@@ -14,4 +14,16 @@ router.post('/', function(req, res) {
         })
 });
 
+router.get('/', function (req, res) { 
+    const filterUsers = req.query.name || null; // Filtrar el usuario por nombre
+    controller.getUsers(filterUsers)
+        .then((userList) => {
+            response.success(req, res, userList, 200);
+        })
+        .catch(e => {
+            response.error(req, res, 'Unexpected Error', 500, e);
+        })
+});
+
+
 module.exports = router; 
