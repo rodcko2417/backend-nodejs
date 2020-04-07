@@ -1,19 +1,25 @@
 // Aca va la logica de negocio
 const store = require('./store'); // Mandamos a llamar al store
 
-function addMessage(user, message) {
+function addMessage(chat, user, message, file) {
     return new Promise((resolve, reject) => {
-        if(!user | !message) {
-            console.error('[messageController] No hay usuario o mensaje');
+        if(!chat || !user || !message) {
+            console.error('[messageController] No hay chat usuario o mensaje');
             reject('Los datos son incorrectos');
             return false; 
         }
-        console.log(user);
-        console.log(message);
+
+        let fileUrl = '';
+        if(file) {
+            fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+        }
+
         const fullMessage = {
+            chat: chat, 
             user: user,
             message: message,
             date: new Date(),
+            file: fileUrl,
         };
 
         store.add(fullMessage);

@@ -1,10 +1,16 @@
 const express = require('express');
+const multer = require('multer'); // Modulo para archivos (npm i multer)
 const response = require('../../network/response');
 const controller = require('./controller');
 const router = express.Router();
 
+const upload = multer({
+    dest: 'public/files/',
+}); // Va a mandar los archivos a esa carpeta
+
+
 router.get('/', function (req, res) { 
-    const filterMessages = req.query.user || null; // Filtrar el mensaje por usuario
+    const filterMessages = req.query.chat || null; // Filtrar el mensaje por usuario
     controller.getMessages(filterMessages)
         .then((messageList) => {
             response.success(req, res, messageList, 200);
@@ -13,9 +19,8 @@ router.get('/', function (req, res) {
             response.error(req, res, 'Unexpected Error', 500, e);
         })
 });
-router.post('/', function (req, res) { 
-
-    controller.addMessage(req.body.user, req.body.message)
+router.post('/', upload.single('file'), function (req, res) { 
+    controller.addMessage(req.body.chat, req.body.user, req.body.message, req.file) // Le mandamos al controlador el archivo y ya podemos hacer algo desde el controlador
         .then((fullMessage) => {
             response.success(req, res, fullMessage, 201);
         })
