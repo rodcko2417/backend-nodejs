@@ -1,9 +1,24 @@
 // Modulo para responder
+const statusMessages = {
+    '200': 'Done',
+    '201': 'Created',
+    '400': 'Invalid format',
+    '500': 'Internal error'
+}
+
 
 exports.success = function (req, res, message, status) { // Podemos configurar a nuestro gusto que parametros queremos que vayan
-    res.status(status || 200).send({ // Si no hay status, por defecto mandame el 200
+    let statusCode = status;
+    let statusMessage = message; 
+    if(!status) {
+        status = 200;
+    }
+    if(!message) {
+        statusMessage = statusMessages[status];
+    }
+    res.status(statusCode || 200).send({ // Si no hay status, por defecto mandame el 200
         error: '',
-        body: message
+        body: statusMessage
     });
 }
 
