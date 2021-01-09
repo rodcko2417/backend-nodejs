@@ -11,7 +11,7 @@ Como instalar el proyecto:
 `npm install`
 
 Como iniciar el proyecto:
-En la carpeta raiz ejecutar los siguientes comandos para iniciar:
+En la carpeta raiz ejecutar el siguiente comando para iniciar:
 - `nodemon server` - Inicia el servicio
 
 ------------
